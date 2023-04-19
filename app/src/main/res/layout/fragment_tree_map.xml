@@ -30,5 +30,17 @@
         app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/add_tree"/>
 
+    <EditText
+        android:id="@+id/tree_name_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:hint="@string/enter_tree_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/add_tree" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

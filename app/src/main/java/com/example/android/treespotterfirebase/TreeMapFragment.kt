@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
@@ -35,6 +36,8 @@ private const val TAG = "TREE_MAP_FRAGMENT"
 class TreeMapFragment : Fragment() {
 
     private lateinit var addTreeButton: FloatingActionButton
+
+    private lateinit var addTreeName: EditText
 
     private var locationPermissionGranted = false
 
@@ -164,9 +167,9 @@ class TreeMapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val mainView = inflater.inflate(R.layout.fragment_tree_map, container, false)
 
+        addTreeName = mainView.findViewById(R.id.tree_name_field)
         addTreeButton = mainView.findViewById(R.id.add_tree)
         addTreeButton.setOnClickListener {
             addTreeAtLocation()
@@ -243,7 +246,18 @@ class TreeMapFragment : Fragment() {
     }
 
     private fun getTreeName(): String {
-        return listOf("Fir", "Oak", "Pine", "Redwood", "Sequoia").random()
+        val enteredTreeName = addTreeName.text.toString().trim()
+        if (enteredTreeName.isBlank()) {
+            showSnackbar("Enter a tree name")
+        } else {
+            clearForm()
+        }
+        return enteredTreeName
+        // return listOf("Fir", "Oak", "Pine", "Redwood", "Sequoia").random()
+    }
+
+    private fun clearForm() {
+        addTreeName.text.clear()
     }
 
     companion object {
